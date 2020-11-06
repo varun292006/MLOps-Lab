@@ -1,0 +1,518 @@
+---
+source: 2
+revision: 7
+description: 
+createdBy:
+  displayName: Varun Bhatnagar
+  url: https://spsprodweu4.vssps.visualstudio.com/A7a7edaea-bd2c-46c0-a3ed-8730b1265291/_apis/Identities/e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+  _links:
+    avatar:
+      href: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+  id: e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+  uniqueName: varunebhatnagar@outlook.com
+  imageUrl: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+  descriptor: msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+createdOn: '2020-08-22T22:41:52.273Z'
+modifiedBy:
+  displayName: Varun Bhatnagar
+  url: https://spsprodweu4.vssps.visualstudio.com/A7a7edaea-bd2c-46c0-a3ed-8730b1265291/_apis/Identities/e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+  _links:
+    avatar:
+      href: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+  id: e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+  uniqueName: varunebhatnagar@outlook.com
+  imageUrl: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+  descriptor: msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+modifiedOn: '2020-08-23T10:37:38.270Z'
+isDeleted: false
+lastRelease:
+  id: 8
+  name: Release-8
+  artifacts: []
+  _links: {}
+  description: Triggered by MLOps-Demo-CI 27.
+  releaseDefinition:
+    id: 1
+    projectReference: 
+    _links: {}
+  createdOn: '2020-08-23T11:16:08.833Z'
+  createdBy:
+    displayName: Varun Bhatnagar
+    url: https://spsprodweu4.vssps.visualstudio.com/A7a7edaea-bd2c-46c0-a3ed-8730b1265291/_apis/Identities/e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+    _links:
+      avatar:
+        href: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+    id: e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+    uniqueName: varunebhatnagar@outlook.com
+    imageUrl: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+    descriptor: msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+variables:
+  aks.agentCount:
+    value: '3'
+  aks.clusterName:
+    value: " aks"
+  aks.vmSize:
+    value: Standard_B4ms
+  azureml.resourceGroup:
+    value: mlops-demorg
+  azureml.workspaceName:
+    value: mlops-demows
+  service.name.production:
+    value: diabetes-service-aks
+  service.name.staging:
+    value: diabetes-service-aci
+variableGroups: []
+environments:
+- id: 1
+  name: Deploy to Pre-Prod
+  rank: 1
+  owner:
+    displayName: Varun Bhatnagar
+    url: https://spsprodweu4.vssps.visualstudio.com/A7a7edaea-bd2c-46c0-a3ed-8730b1265291/_apis/Identities/e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+    _links:
+      avatar:
+        href: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+    id: e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+    uniqueName: varunebhatnagar@outlook.com
+    imageUrl: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+    descriptor: msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+  variables: {}
+  variableGroups: []
+  preDeployApprovals:
+    approvals:
+    - rank: 1
+      isAutomated: true
+      isNotificationOn: false
+      id: 1
+    approvalOptions:
+      requiredApproverCount: 
+      releaseCreatorCanBeApprover: false
+      autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped: false
+      enforceIdentityRevalidation: false
+      timeoutInMinutes: 0
+      executionOrder: 1
+  deployStep:
+    id: 2
+  postDeployApprovals:
+    approvals:
+    - rank: 1
+      isAutomated: true
+      isNotificationOn: false
+      id: 3
+    approvalOptions:
+      requiredApproverCount: 
+      releaseCreatorCanBeApprover: false
+      autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped: false
+      enforceIdentityRevalidation: false
+      timeoutInMinutes: 0
+      executionOrder: 2
+  deployPhases:
+  - deploymentInput:
+      parallelExecution:
+        parallelExecutionType: 0
+      agentSpecification:
+        identifier: ubuntu-16.04
+      skipArtifactsDownload: false
+      artifactsDownloadInput:
+        downloadInputs: []
+      queueId: 9
+      demands: []
+      enableAccessToken: false
+      timeoutInMinutes: 0
+      jobCancelTimeoutInMinutes: 1
+      condition: succeeded()
+      overrideInputs: {}
+    rank: 1
+    phaseType: 1
+    name: Agent job
+    refName: 
+    workflowTasks:
+    - environment: {}
+      taskId: 33c63b11-352b-45a2-ba1b-54cb568a29ca
+      version: 0.*
+      name: Use Python 3.6
+      refName: ''
+      enabled: true
+      alwaysRun: false
+      continueOnError: false
+      timeoutInMinutes: 0
+      definitionType: task
+      overrideInputs: {}
+      condition: succeeded()
+      inputs:
+        versionSpec: '3.6'
+        addToPath: 'true'
+        architecture: x64
+    - environment: {}
+      taskId: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+      version: 2.*
+      name: Add Azure ML Extension
+      refName: ''
+      enabled: true
+      alwaysRun: false
+      continueOnError: false
+      timeoutInMinutes: 0
+      definitionType: task
+      overrideInputs: {}
+      condition: succeeded()
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: az extension add -n azure-cli-ml
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: ''
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+    - environment: {}
+      taskId: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+      version: 2.*
+      name: Deploy to ML Service as ACI
+      refName: ''
+      enabled: true
+      alwaysRun: false
+      continueOnError: false
+      timeoutInMinutes: 0
+      definitionType: task
+      overrideInputs: {}
+      condition: succeeded()
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: az ml model deploy -g $(azureml.resourceGroup) -w $(azureml.workspaceName)
+          -n $(service.name.staging) -f ../metadata/model.json --dc aciDeploymentConfig.yml
+          --ic inferenceConfig.yml
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: "$(System.DefaultWorkingDirectory)/_MLOps-Demo-CI/drop/deployment"
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+  environmentOptions:
+    emailNotificationType: OnlyOnFailure
+    emailRecipients: release.environment.owner;release.creator
+    skipArtifactsDownload: false
+    timeoutInMinutes: 0
+    enableAccessToken: false
+    publishDeploymentStatus: true
+    badgeEnabled: false
+    autoLinkWorkItems: false
+    pullRequestDeploymentEnabled: false
+  demands: []
+  conditions:
+  - name: ReleaseStarted
+    conditionType: 1
+    value: ''
+  executionPolicy:
+    concurrencyCount: 1
+    queueDepthCount: 0
+  schedules: []
+  currentRelease:
+    id: 8
+    url: https://vsrm.dev.azure.com/varunebhatnagar/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/_apis/Release/releases/8
+    _links: {}
+  retentionPolicy:
+    daysToKeep: 30
+    releasesToKeep: 3
+    retainBuild: true
+  processParameters: {}
+  properties:
+    BoardsEnvironmentType:
+      "$type": System.String
+      "$value": unmapped
+    LinkBoardsWorkItems:
+      "$type": System.String
+      "$value": 'False'
+  preDeploymentGates:
+    id: 0
+    gatesOptions: 
+    gates: []
+  postDeploymentGates:
+    id: 0
+    gatesOptions: 
+    gates: []
+  environmentTriggers: []
+  badgeUrl: https://vsrm.dev.azure.com/varunebhatnagar/_apis/public/Release/badge/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/1/1
+- id: 2
+  name: Deploy to Production
+  rank: 2
+  owner:
+    displayName: Varun Bhatnagar
+    url: https://spsprodweu4.vssps.visualstudio.com/A7a7edaea-bd2c-46c0-a3ed-8730b1265291/_apis/Identities/e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+    _links:
+      avatar:
+        href: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+    id: e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+    uniqueName: varunebhatnagar@outlook.com
+    imageUrl: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+    descriptor: msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+  variables: {}
+  variableGroups: []
+  preDeployApprovals:
+    approvals:
+    - rank: 1
+      isAutomated: false
+      isNotificationOn: false
+      approver:
+        displayName: Varun Bhatnagar
+        url: https://spsprodweu4.vssps.visualstudio.com/A7a7edaea-bd2c-46c0-a3ed-8730b1265291/_apis/Identities/e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+        _links:
+          avatar:
+            href: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+        id: e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+        uniqueName: varunebhatnagar@outlook.com
+        imageUrl: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+        descriptor: msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+      id: 7
+    approvalOptions:
+      requiredApproverCount: 
+      releaseCreatorCanBeApprover: true
+      autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped: false
+      enforceIdentityRevalidation: false
+      timeoutInMinutes: 0
+      executionOrder: 1
+  deployStep:
+    id: 5
+  postDeployApprovals:
+    approvals:
+    - rank: 1
+      isAutomated: true
+      isNotificationOn: false
+      id: 6
+    approvalOptions:
+      requiredApproverCount: 
+      releaseCreatorCanBeApprover: false
+      autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped: false
+      enforceIdentityRevalidation: false
+      timeoutInMinutes: 0
+      executionOrder: 2
+  deployPhases:
+  - deploymentInput:
+      parallelExecution:
+        parallelExecutionType: 0
+      agentSpecification:
+        identifier: ubuntu-16.04
+      skipArtifactsDownload: false
+      artifactsDownloadInput:
+        downloadInputs: []
+      queueId: 9
+      demands: []
+      enableAccessToken: false
+      timeoutInMinutes: 0
+      jobCancelTimeoutInMinutes: 1
+      condition: succeeded()
+      overrideInputs: {}
+    rank: 1
+    phaseType: 1
+    name: Agent job
+    refName: 
+    workflowTasks:
+    - environment: {}
+      taskId: 33c63b11-352b-45a2-ba1b-54cb568a29ca
+      version: 0.*
+      name: Use Python 3.6
+      refName: ''
+      enabled: true
+      alwaysRun: false
+      continueOnError: false
+      timeoutInMinutes: 0
+      definitionType: task
+      overrideInputs: {}
+      condition: succeeded()
+      inputs:
+        versionSpec: '3.6'
+        addToPath: 'true'
+        architecture: x64
+    - environment: {}
+      taskId: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+      version: 2.*
+      name: Install Azure ML Extension
+      refName: ''
+      enabled: true
+      alwaysRun: false
+      continueOnError: false
+      timeoutInMinutes: 0
+      definitionType: task
+      overrideInputs: {}
+      condition: succeeded()
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: az extension add -n azure-cli-ml
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: ''
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+    - environment: {}
+      taskId: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+      version: 2.*
+      name: Create Azure Kubernetes Cluster
+      refName: ''
+      enabled: true
+      alwaysRun: false
+      continueOnError: false
+      timeoutInMinutes: 0
+      definitionType: task
+      overrideInputs: {}
+      condition: succeeded()
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: az ml computetarget create aks -g $(azureml.resourceGroup) -w
+          $(azureml.workspaceName) -n $(aks.clusterName) -s $(aks.vmSize) -a $(aks.agentCount)
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: ''
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+    - environment: {}
+      taskId: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+      version: 2.*
+      name: Deploy to Prod Environment
+      refName: ''
+      enabled: true
+      alwaysRun: false
+      continueOnError: false
+      timeoutInMinutes: 0
+      definitionType: task
+      overrideInputs: {}
+      condition: succeeded()
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: az ml model deploy -g $(azureml.resourceGroup) -w $(azureml.workspaceName)
+          -n $(service.name.production) -f ../metadata/model.json --dc aksDeploymentConfig.yml
+          --ic inferenceConfig.yml --ct $(aks.clusterName)  --overwrite
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: "$(System.DefaultWorkingDirectory)/_MLOps-Demo-CI/drop/deployment"
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+  environmentOptions:
+    emailNotificationType: OnlyOnFailure
+    emailRecipients: release.environment.owner;release.creator
+    skipArtifactsDownload: false
+    timeoutInMinutes: 0
+    enableAccessToken: false
+    publishDeploymentStatus: true
+    badgeEnabled: false
+    autoLinkWorkItems: false
+    pullRequestDeploymentEnabled: false
+  demands: []
+  conditions:
+  - name: Deploy to Pre-Prod
+    conditionType: 2
+    value: '4'
+  executionPolicy:
+    concurrencyCount: 1
+    queueDepthCount: 0
+  schedules: []
+  currentRelease:
+    id: 8
+    url: https://vsrm.dev.azure.com/varunebhatnagar/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/_apis/Release/releases/8
+    _links: {}
+  retentionPolicy:
+    daysToKeep: 30
+    releasesToKeep: 3
+    retainBuild: true
+  processParameters: {}
+  properties:
+    BoardsEnvironmentType:
+      "$type": System.String
+      "$value": unmapped
+    LinkBoardsWorkItems:
+      "$type": System.String
+      "$value": 'False'
+  preDeploymentGates:
+    id: 0
+    gatesOptions: 
+    gates: []
+  postDeploymentGates:
+    id: 0
+    gatesOptions: 
+    gates: []
+  environmentTriggers: []
+  badgeUrl: https://vsrm.dev.azure.com/varunebhatnagar/_apis/public/Release/badge/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/1/2
+artifacts:
+- sourceId: 88cb2f9d-a7e1-483d-90c6-85b7325ba73c:1
+  type: Build
+  alias: _MLOps-Demo-CI
+  definitionReference:
+    artifactSourceDefinitionUrl:
+      id: https://dev.azure.com/varunebhatnagar/_permalink/_build/index?collectionId=b752757c-7749-46bb-92f7-385df21a887f&projectId=88cb2f9d-a7e1-483d-90c6-85b7325ba73c&definitionId=1
+      name: ''
+    defaultVersionBranch:
+      id: ''
+      name: ''
+    defaultVersionSpecific:
+      id: ''
+      name: ''
+    defaultVersionTags:
+      id: ''
+      name: ''
+    defaultVersionType:
+      id: latestType
+      name: Latest
+    definition:
+      id: '1'
+      name: MLOps-Demo-CI
+    definitions:
+      id: ''
+      name: ''
+    IsMultiDefinitionType:
+      id: 'False'
+      name: 'False'
+    project:
+      id: 88cb2f9d-a7e1-483d-90c6-85b7325ba73c
+      name: MLOps-Demo
+    repository:
+      id: ''
+      name: ''
+  isPrimary: true
+  isRetained: false
+triggers:
+- artifactAlias: _MLOps-Demo-CI
+  triggerConditions: []
+  triggerType: 1
+releaseNameFormat: Release-$(rev:r)
+tags: []
+properties:
+  DefinitionCreationSource:
+    "$type": System.String
+    "$value": ReleaseNew
+  IntegrateBoardsWorkItems:
+    "$type": System.String
+    "$value": 'False'
+  IntegrateJiraWorkItems:
+    "$type": System.String
+    "$value": 'false'
+id: 1
+name: Deployment Pipeline
+path: "\\"
+projectReference: 
+url: https://vsrm.dev.azure.com/varunebhatnagar/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/_apis/Release/definitions/1
+_links:
+  self:
+    href: https://vsrm.dev.azure.com/varunebhatnagar/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/_apis/Release/definitions/1
+  web:
+    href: https://dev.azure.com/varunebhatnagar/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/_release?definitionId=1

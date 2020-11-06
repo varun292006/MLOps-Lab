@@ -1,0 +1,478 @@
+---
+options:
+- enabled: false
+  definition:
+    id: 5d58cc01-7c75-450c-be18-a388ddb129ec
+  inputs:
+    branchFilters: '["+refs/heads/*"]'
+    additionalFields: "{}"
+- enabled: false
+  definition:
+    id: a9db38f9-9fdc-478c-b0f9-464221e58316
+  inputs:
+    workItemType: Issue
+    assignToRequestor: 'true'
+    additionalFields: "{}"
+triggers:
+- branchFilters:
+  - "+refs/heads/master"
+  pathFilters: []
+  batchChanges: false
+  maxConcurrentBuildsPerBranch: 1
+  pollingInterval: 0
+  triggerType: 2
+variables:
+  amlcompute.idleSecondsBeforeScaledown:
+    value: '300'
+  amlcompute.maxNodes:
+    value: '2'
+  amlcompute.minNodes:
+    value: '0'
+  amlcompute.vmSize:
+    value: 'STANDARD_DS2_V2 '
+  azurecompute.clusterName:
+    value: mytestcluster
+  azureml.location:
+    value: westeurope
+  azureml.resourceGroup:
+    value: mlops-demorg
+  azureml.workspaceName:
+    value: mlops-demows
+  experiment.name:
+    value: diabetes_sklearn
+  model.name:
+    value: diabetes_model
+  system.debug:
+    value: 'false'
+    allowOverride: true
+properties: {}
+tags: []
+_links:
+  self:
+    href: https://dev.azure.com/varunebhatnagar/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/_apis/build/Definitions/1?revision=20
+  web:
+    href: https://dev.azure.com/varunebhatnagar/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/_build/definition?definitionId=1
+  editor:
+    href: https://dev.azure.com/varunebhatnagar/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/_build/designer?id=1&_a=edit-build-definition
+  badge:
+    href: https://dev.azure.com/varunebhatnagar/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/_apis/build/status/1
+comment: Add copy files step
+jobAuthorizationScope: 1
+jobTimeoutInMinutes: 60
+jobCancelTimeoutInMinutes: 5
+process:
+  phases:
+  - steps:
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Use Python 3.6
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 33c63b11-352b-45a2-ba1b-54cb568a29ca
+        versionSpec: 0.*
+        definitionType: task
+      inputs:
+        versionSpec: '3.6'
+        addToPath: 'true'
+        architecture: x64
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Install Python Requirements
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 6c731c3c-3c68-459a-a5c9-bde6e6595b5b
+        versionSpec: 3.*
+        definitionType: task
+      inputs:
+        targetType: filePath
+        filePath: setup/install_requirements.sh
+        arguments: ''
+        script: |
+          # Write your commands here
+
+          echo 'Hello world'
+        workingDirectory: setup
+        failOnStderr: 'false'
+        noProfile: 'true'
+        noRc: 'true'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Data Quality Checks
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 6c731c3c-3c68-459a-a5c9-bde6e6595b5b
+        versionSpec: 3.*
+        definitionType: task
+      inputs:
+        targetType: inline
+        filePath: ''
+        arguments: ''
+        script: 'pytest tests/unit/data_test.py --doctest-modules --junitxml=junit/test-results.xml
+          --cov=data_test --cov-report=xml --cov-report=html
+
+'
+        workingDirectory: ''
+        failOnStderr: 'false'
+        noProfile: 'true'
+        noRc: 'true'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: true
+      displayName: Publish Test Results **/test-*.xml
+      timeoutInMinutes: 0
+      condition: succeededOrFailed()
+      task:
+        id: 0b0f01ed-7dde-43ff-9cbb-e48954daf9b1
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        testRunner: JUnit
+        testResultsFiles: "**/test-*.xml"
+        searchFolder: "$(System.DefaultWorkingDirectory)"
+        mergeTestResults: 'false'
+        failTaskOnFailedTests: 'false'
+        testRunTitle: ''
+        platform: ''
+        configuration: ''
+        publishRunAttachments: 'true'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Install AzureML CLI extension
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: az extension add -n azure-cli-ml
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: ''
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Create AzureML Workspace
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: az ml workspace create -g $(azureml.resourceGroup) -w $(azureml.workspaceName)
+          -l $(azureml.location) --exist-ok --yes
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: ''
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Create Compute Cluster
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: az ml computetarget create amlcompute -g $(azureml.resourceGroup)
+          -w $(azureml.workspaceName) -n $(azurecompute.clusterName) -s $(amlcompute.vmSize)
+          --min-nodes $(amlcompute.minNodes)  --max-nodes $(amlcompute.maxNodes) --idle-seconds-before-scaledown
+          $(amlcompute.idleSecondsBeforeScaledown)
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: ''
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Upload Data to Default Datastore
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: az ml datastore upload -w $(azureml.workspaceName) -g $(azureml.resourceGroup)
+          -n $(az ml datastore show-default -w $(azureml.workspaceName) -g $(azureml.resourceGroup)
+          --query name -o tsv) -p data -u diabetes --overwrite true
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: ''
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Create Metadata and Models Directory
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 6c731c3c-3c68-459a-a5c9-bde6e6595b5b
+        versionSpec: 3.*
+        definitionType: task
+      inputs:
+        targetType: inline
+        filePath: ''
+        arguments: ''
+        script: mkdir metadata && mkdir models
+        workingDirectory: ''
+        failOnStderr: 'false'
+        noProfile: 'true'
+        noRc: 'true'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Train Model
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: az ml run submit-script -g $(azureml.resourceGroup) -w $(azureml.workspaceName)
+          -e $(experiment.name) --ct $(azurecompute.clusterName) -d training/conda_dependencies.yml
+          -c train_diabetes -t ../metadata/run.json  training/train_diabetes.py
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: ''
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Register Model
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: az ml model register -g $(azureml.resourceGroup) -w $(azureml.workspaceName)
+          -n $(model.name) -f ../metadata/run.json --asset-path outputs/models/sklearn_diabetes_model.pkl
+          -d "Linear Regression" --tag "data"="diabetes" --tag "model"="regression"
+          --model-framework ScikitLearn -t ../metadata/model.json
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: ''
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Download Model
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 46e4be58-730b-4389-8a2f-ea10b3e5e815
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        connectedServiceNameARM: 127b9ab5-5961-40b0-947c-ee21ccb7aa46
+        scriptType: bash
+        scriptLocation: inlineScript
+        scriptPath: ''
+        inlineScript: 'az ml model download -g $(azureml.resourceGroup) -w $(azureml.workspaceName)
+          -i $(jq -r .modelId ../metadata/model.json) -t ./models --overwrite '
+        scriptArguments: ''
+        powerShellErrorActionPreference: stop
+        addSpnToEnvironment: 'false'
+        useGlobalConfig: 'false'
+        cwd: ''
+        failOnStandardError: 'false'
+        powerShellIgnoreLASTEXITCODE: 'false'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Copy Files to Artifact Staging Directory
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 5bfb729a-a7c8-4a78-a7c3-8d717bb7c13c
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        SourceFolder: "$(Agent.BuildDirectory)"
+        Contents: |-
+          **/metadata/*
+          **/tests/integration/ *
+        TargetFolder: "$(Build.ArtifactStagingDirectory)"
+        CleanTargetFolder: 'false'
+        OverWrite: 'false'
+        flattenFolders: 'false'
+        preserveTimestamp: 'false'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: 5bfb729a-a7c8-4a78-a7c3-8d717bb7c13c
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        SourceFolder: "$(Build.SourcesDirectory)"
+        Contents: |-
+          **/models/*
+          **/deployment/*
+        TargetFolder: "$(Build.ArtifactStagingDirectory)"
+        CleanTargetFolder: 'false'
+        OverWrite: 'false'
+        flattenFolders: 'false'
+        preserveTimestamp: 'false'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Publish Pipeline Artifact
+      timeoutInMinutes: 0
+      condition: succeeded()
+      task:
+        id: ecdc45f6-832d-4ad9-b52b-ee49e94659be
+        versionSpec: 1.*
+        definitionType: task
+      inputs:
+        path: "$(Build.ArtifactStagingDirectory) "
+        artifactName: drop
+        artifactType: pipeline
+        fileSharePath: ''
+        parallel: 'false'
+        parallelCount: '8'
+    name: Agent job 1
+    refName: Job_1
+    condition: succeeded()
+    target:
+      executionOptions:
+        type: 0
+      allowScriptsAuthAccessOption: false
+      type: 1
+    jobAuthorizationScope: 1
+  target:
+    agentSpecification:
+      identifier: ubuntu-16.04
+  type: 1
+repository:
+  properties:
+    cleanOptions: '0'
+    labelSources: '0'
+    labelSourcesFormat: "$(build.buildNumber)"
+    reportBuildStatus: 'true'
+    gitLfsSupport: 'false'
+    skipSyncSource: 'false'
+    checkoutNestedSubmodules: 'false'
+    fetchDepth: '0'
+  id: ee913b45-c6ee-4566-a03b-4ac6bc65e3d5
+  type: TfsGit
+  name: MLOps-Demo
+  url: https://dev.azure.com/varunebhatnagar/MLOps-Demo/_git/MLOps-Demo
+  defaultBranch: refs/heads/master
+  clean: 'false'
+  checkoutSubmodules: false
+processParameters: {}
+quality: 1
+authoredBy:
+  displayName: Varun Bhatnagar
+  url: https://spsprodweu4.vssps.visualstudio.com/A7a7edaea-bd2c-46c0-a3ed-8730b1265291/_apis/Identities/e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+  _links:
+    avatar:
+      href: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+  id: e8490e16-94ac-6ea1-ab9e-9c6ced424e14
+  uniqueName: varunebhatnagar@outlook.com
+  imageUrl: https://dev.azure.com/varunebhatnagar/_apis/GraphProfile/MemberAvatars/msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+  descriptor: msa.ZTg0OTBlMTYtOTRhYy03ZWExLWFiOWUtOWM2Y2VkNDI0ZTE0
+drafts: []
+queue:
+  _links:
+    self:
+      href: https://dev.azure.com/varunebhatnagar/_apis/build/Queues/9
+  id: 9
+  name: Azure Pipelines
+  url: https://dev.azure.com/varunebhatnagar/_apis/build/Queues/9
+  pool:
+    id: 9
+    name: Azure Pipelines
+    isHosted: true
+id: 1
+name: MLOps-Demo-CI
+url: https://dev.azure.com/varunebhatnagar/88cb2f9d-a7e1-483d-90c6-85b7325ba73c/_apis/build/Definitions/1?revision=20
+uri: vstfs:///Build/Definition/1
+path: "\\"
+type: 2
+queueStatus: 0
+revision: 20
+createdDate: '2020-08-22T23:58:45.487Z'
+project:
+  id: 88cb2f9d-a7e1-483d-90c6-85b7325ba73c
+  name: MLOps-Demo
+  url: https://dev.azure.com/varunebhatnagar/_apis/projects/88cb2f9d-a7e1-483d-90c6-85b7325ba73c
+  state: 1
+  revision: 11
+  visibility: 0
+  lastUpdateTime: '2020-08-20T23:46:35.293Z'
